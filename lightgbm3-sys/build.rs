@@ -4,7 +4,7 @@ use std::{
     path::{Path, PathBuf},
     process::Command,
 };
-use std::fs;c
+use std::fs;
 
 #[derive(Debug)]
 struct DoxygenCallback;
