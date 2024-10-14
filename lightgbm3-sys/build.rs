@@ -4,6 +4,7 @@ use std::{
     path::{Path, PathBuf},
     process::Command,
 };
+use std::fs;c
 
 #[derive(Debug)]
 struct DoxygenCallback;
@@ -17,7 +18,8 @@ impl bindgen::callbacks::ParseCallbacks for DoxygenCallback {
 fn main() {
     let target = env::var("TARGET").unwrap();
     let out_dir = env::var("OUT_DIR").unwrap();
-    println!("We are in: {:?}",  env::current_dir());
+    let path = env::current_dir().unwrap();
+    println!("We are in: {:?}",  path);
     
     // Read the directory contents and unwrap it
     let entries = fs::read_dir(&path).unwrap();
