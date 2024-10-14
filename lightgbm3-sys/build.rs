@@ -28,6 +28,15 @@ fn main() {
         let entry = entry.unwrap();
         println!("{:?}", entry.path());
     }
+
+   // Read the directory contents and unwrap it
+    let entries = fs::read_dir(&format!("{}/lightgbm",path)).unwrap();
+    println!("Files in the lightgbm directory:"); // did it pull the submodule?
+    for entry in entries {
+        let entry = entry.unwrap();
+        println!("{:?}", entry.path());
+    }
+    
     
     println!("Using OUT_DIR: {}", out_dir);
     let lgbm_root = Path::new(&out_dir).join("lightgbm");
