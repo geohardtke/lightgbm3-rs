@@ -17,6 +17,16 @@ impl bindgen::callbacks::ParseCallbacks for DoxygenCallback {
 fn main() {
     let target = env::var("TARGET").unwrap();
     let out_dir = env::var("OUT_DIR").unwrap();
+    println!("We are in: {:?}",  env::current_dir());
+    
+    // Read the directory contents and unwrap it
+    let entries = fs::read_dir(&path).unwrap();
+    println!("Files in the current directory:");
+    for entry in entries {
+        let entry = entry.unwrap();
+        println!("{:?}", entry.path());
+    }
+    
     println!("Using OUT_DIR: {}", out_dir);
     let lgbm_root = Path::new(&out_dir).join("lightgbm");
 
