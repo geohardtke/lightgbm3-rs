@@ -30,7 +30,7 @@ fn main() {
     }
 
    // Read the directory contents and unwrap it
-    let entries = fs::read_dir(&format!("{}/lightgbm",path)).unwrap();
+    let entries = fs::read_dir(&format!("{}/lightgbm",path.display())).unwrap();
     println!("Files in the lightgbm directory:"); // did it pull the submodule?
     for entry in entries {
         let entry = entry.unwrap();
