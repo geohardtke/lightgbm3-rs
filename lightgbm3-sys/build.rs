@@ -29,6 +29,29 @@ fn main() {
         println!("{:?}", entry.path());
     }
 
+        let git_version = Command::new("git")
+        .arg("--version")
+        .output()
+        .expect("Failed to execute git command");
+
+    if git_version.status.success() {
+        println!("cargo:warning=Git found. Initializing submodules...");
+
+        // Execute the git submodule update command
+        let output = Command::new("git")
+            .args(&["submodule", "update", "--init", "--recursive"])
+            .output()
+            .expect("Failed to update git submodules");
+
+        if output.status.success() {
+            println!("cargo:warning=Git submodule updated successfully.");
+        } else {
+            eprintln!("cargo:warning=Failed to update git submodules: {}", String::from_utf8_lossy(&output.stderr));
+        }
+    } else {
+        println!("cargo:warning=Git is not available in the environment.");
+    }
+
    // Read the directory contents and unwrap it
     let entries = fs::read_dir(&format!("{}/lightgbm",path.display())).unwrap();
     println!("Files in the lightgbm directory:"); // did it pull the submodule?
