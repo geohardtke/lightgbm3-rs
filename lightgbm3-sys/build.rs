@@ -64,6 +64,14 @@ fn main() {
             );
         }
     }
+    println!("Copied source to {}, lgbm_root.display() );
+       // Read the directory contents and unwrap it
+    let entries = fs::read_dir( lgbm_root.display() ).unwrap();
+    println!("Files in the lightgbm target directory:"); // did it pull the submodule?
+    for entry in entries {
+        let entry = entry.unwrap();
+        println!("{:?}", entry.path());
+    }
 
     // CMake
     let mut cfg = Config::new(&lgbm_root);
