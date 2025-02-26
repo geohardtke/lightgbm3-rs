@@ -16,32 +16,20 @@ impl bindgen::callbacks::ParseCallbacks for DoxygenCallback {
 
 fn main() {
     let target = env::var("TARGET").unwrap();
-    let out_dir = env::var("OUT_DIR").unwrap();
+    let out_dir = env::var("BUILD_DIR").unwrap();
     let lgbm_root = Path::new(&out_dir).join("lightgbm");
 
     // copy source code
-    if !lgbm_root.exists() {
-        let status = if target.contains("windows") {
-            Command::new("cmd")
-                .args(&[
-                    "/C",
-                    "echo D | xcopy /S /Y lightgbm",
-                    lgbm_root.to_str().unwrap(),
-                ])
-                .status()
-        } else {
-            Command::new("cp")
-                .args(&["-r", "lightgbm", lgbm_root.to_str().unwrap()])
-                .status()
-        };
-        if let Some(err) = status.err() {
-            panic!(
-                "Failed to copy ./lightgbm to {}: {}",
-                lgbm_root.display(),
-                err
-            );
-        }
-    }
+    let dst = lgbm_root.to_str().unwrap()
+    println!("Copy source to dst: {}", dst);
+    Command::new("cp")
+        .args(&["-r", "lightgbm", ])
+        .output()
+        .expect("failed to execute process");
+    Command::new("chmod")
+        .args(&["-R", "755", dst])
+        .output()
+        .expect("failed to execute process");    
 
     // CMake
     let mut cfg = Config::new(&lgbm_root);
