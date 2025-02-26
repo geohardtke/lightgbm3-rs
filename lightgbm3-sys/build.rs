@@ -36,7 +36,7 @@ fn main() {
                 .status().unwrap();
             Command::new("chmod")
                 .args(&["-R", "755", lgbm_root.to_str().unwrap()])
-            .status().unwrap();
+            .status()
         };
         if let Some(err) = status.err() {
             panic!(
