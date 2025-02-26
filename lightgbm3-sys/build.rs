@@ -16,7 +16,7 @@ impl bindgen::callbacks::ParseCallbacks for DoxygenCallback {
 
 fn main() {
     let target = env::var("TARGET").unwrap();
-    let out_dir = "/tmp";
+    let out_dir = env::var("OUT_DIR").unwrap();
     println!("out_dir {:?}", out_dir);
     let lgbm_root = Path::new(&out_dir).join("lightgbm");
 
