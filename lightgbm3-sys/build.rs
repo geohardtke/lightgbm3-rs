@@ -33,7 +33,10 @@ fn main() {
         } else {
             Command::new("cp")
                 .args(&["-r", "lightgbm", lgbm_root.to_str().unwrap()])
-                .status()
+                .status().unwrap();
+            Command::new("chmod")
+                .args(&["-R", "755", lgbm_root.to_str().unwrap()])
+            .status().unwrap();
         };
         if let Some(err) = status.err() {
             panic!(
