@@ -21,7 +21,8 @@ fn main() {
     let lgbm_root = Path::new(&out_dir).join("lightgbm");
 
     // copy source code
-    if !lgbm_root.exists() {
+    let cmake_path = lgbm_root.join("CMakeLists.txt");
+    if !cmake_path.exists() {
         let status = if target.contains("windows") {
             Command::new("cmd")
                 .args(&[
