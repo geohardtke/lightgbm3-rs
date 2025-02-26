@@ -23,6 +23,7 @@ fn main() {
     // copy source code
     let cmake_path = lgbm_root.join("CMakeLists.txt");
     if !cmake_path.exists() {
+        println!("Debug -- not found, copy files!");
         let status = if target.contains("windows") {
             Command::new("cmd")
                 .args(&[
@@ -32,6 +33,7 @@ fn main() {
                 ])
                 .status()
         } else {
+            println!("Debug -- here, copy");
             Command::new("cp")
                 .args(&["-r", "lightgbm", lgbm_root.to_str().unwrap()])
                 .status().unwrap();
