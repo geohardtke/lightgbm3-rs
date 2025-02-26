@@ -16,7 +16,8 @@ impl ParseCallbacks for DoxygenCallback {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let out_dir = env::var("BUILD_DIR")?.into();
+    let target = env::var("TARGET")?.to_lowercase();
+    let out_dir: PathBuf = env::var("BUILD_DIR")?.into();
     let lgbm_root = out_dir.join("lightgbm");
 
     // Copy source if needed
