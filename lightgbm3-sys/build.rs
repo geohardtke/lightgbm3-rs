@@ -23,7 +23,7 @@ fn main() {
     let dst = lgbm_root.to_str().unwrap();
     println!("Copy source to dst: {}", dst);
     Command::new("cp")
-        .args(&["-r", "lightgbm", ])
+        .args(&["-r", "lightgbm", dst])
         .output()
         .expect("failed to execute process");
     Command::new("chmod")
