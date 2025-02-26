@@ -44,7 +44,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     #[cfg(feature = "cuda")]
     let cfg = cfg.define("USE_CUDA", "ON");
 
-    let dst = cfg.build()?;
+    let dst = cfg.build();
 
     // Generate bindings
     let bindings = bindgen::Builder::default()
