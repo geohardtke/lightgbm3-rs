@@ -20,7 +20,7 @@ fn main() {
     let lgbm_root = Path::new(&out_dir).join("lightgbm");
 
     // copy source code
-    let dst = lgbm_root.to_str().unwrap()
+    let dst = lgbm_root.to_str().unwrap();
     println!("Copy source to dst: {}", dst);
     Command::new("cp")
         .args(&["-r", "lightgbm", ])
